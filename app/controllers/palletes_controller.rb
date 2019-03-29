@@ -1,2 +1,0 @@
-class PalletesController < ApplicationController
-end

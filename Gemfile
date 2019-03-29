@@ -62,3 +62,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "colorable", "~> 0.2.1"
+
+gem "bootstrap", "~> 4.3"
+
+gem "jquery-rails", "~> 4.3"
+
+gem "autoprefixer-rails", "~> 9.5"
