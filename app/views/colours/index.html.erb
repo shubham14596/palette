@@ -1,0 +1,9 @@
+<h3> All Colours </h3>
+<% @colours.each do |colour| %>
+  <div class="row">
+    <span class="col-md-4" style="width:50px; height:50px; background: rgb(<%= colour.R %>, <%= colour.G %>, <%= colour.B %>)"></span>
+
+    <%= link_to 'show', colour_path(id: colour.id), class: "col-md-1", method: :get %>
+    <%= link_to 'Delete', colour_path(id: colour.id) , method: :delete %>
+  </div>
+<% end %>

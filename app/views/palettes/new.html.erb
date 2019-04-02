@@ -1,0 +1,19 @@
+<h3>Create a new Palette</h3>
+<% Palette.initialize_array %>
+<div class="card">
+  <ul>
+    <div id = "colors">
+    </div>
+  </ul>
+<%= form_tag(colours_path, remote:true) do %>
+<%= text_field_tag :color, nil, placeholder: 'color hex code' %>
+<%= text_field_tag :name , nil, placeholder: 'color name' %>
+<%= submit_tag 'Add color' %>
+<% end %>
+</div>
+<br><br>
+
+<%= form_for :palette, url: palettes_path do |f| %>
+<%= f.text_field :name , placeholder: 'Palette Name' %>
+<%= f.submit :create_palette %>
+<% end %>

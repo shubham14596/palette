@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-5">
+      <div class = "card" style="border-radius: 10px; margin-left: 20px">
+        <div class = "card-body row", style="overflow: auto; height: 200px">
+          <% @palette.colours.each do |color| %>
+            <span title="xyz" class="col-md-3" style="border-radius: 50%; background: rgb(<%= color.R %>, <%= color.G %>, <%= color.B %>); width:50px; height:50px; margin: 0.8rem">
+            </span>
+          <% end %>
+        </div>
+        <div class="card-footer">
+          <%= link_to "#{@palette.name}", palette_path(id: @palette.id), style: "color:red" %>
+          <%= link_to '', palette_path(id: @palette.id) ,style: "float: right", class: "btn fa fa-trash", method: :delete %>
+        </div>
+      </div>
+  </div>
+  <div class="col-md-5">
+    <%= form_tag(palettes_add_colour_path(id: @palette.id), local: true) do %>
+    <%= label_tag :enter_hex_code %>
+    <%= text_field_tag :color %><br>
+    <%= label_tag :color_name %>
+    <%= text_field_tag :name %>
+    <%= submit_tag 'Add color' %>
+    <% end %>
+    <br><br>
+
+    <%= form_with(model: @palette, local: true) do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    <% end %>
+  </div>
+</div>

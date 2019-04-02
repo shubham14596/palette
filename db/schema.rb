@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_29_120840) do
+ActiveRecord::Schema.define(version: 2019_04_01_121136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "colors", force: :cascade do |t|
+  create_table "colours", force: :cascade do |t|
     t.string "name"
     t.integer "status"
     t.integer "R"
@@ -25,11 +25,11 @@ ActiveRecord::Schema.define(version: 2019_03_29_120840) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "colors_palettes", id: false, force: :cascade do |t|
-    t.bigint "color_id"
+  create_table "colours_palettes", id: false, force: :cascade do |t|
+    t.bigint "colour_id"
     t.bigint "palette_id"
-    t.index ["color_id"], name: "index_colors_palettes_on_color_id"
-    t.index ["palette_id"], name: "index_colors_palettes_on_palette_id"
+    t.index ["colour_id"], name: "index_colours_palettes_on_colour_id"
+    t.index ["palette_id"], name: "index_colours_palettes_on_palette_id"
   end
 
   create_table "palettes", force: :cascade do |t|

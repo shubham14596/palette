@@ -1,0 +1,17 @@
+<h3><%= @colour.name %></h3>
+
+<%= form_with(model: @colour, local: true) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :R %>
+  <%= f.text_field :R %><br>
+
+  <%= f.label :G %>
+  <%= f.text_field :G %><br>
+
+  <%= f.label :B %>
+  <%= f.text_field :B %><br>
+
+  <%= f.submit :change %>
+<% end %>
