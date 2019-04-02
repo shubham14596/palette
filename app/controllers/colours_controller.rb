@@ -1,14 +1,14 @@
 class ColoursController < ApplicationController
+  before_action :find_colour, only: [:show, :update, :destroy]
+
   def show
-    @colour = Colour.find_by_id(params[:id])
   end
 
   def new
   end
 
   def update
-    colour = Colour.find.find_by_id(params[:id])
-    colour.update(colour_params)
+    @colour.update(colour_params)
     redirect_to colours_path
   end
 
@@ -22,18 +22,17 @@ class ColoursController < ApplicationController
   end
 
   def destroy
-  	colour = Colour.find_by_id(params[:id])
-  	flash[:error] = "colour not deleted" unless colour.destroy
+  	flash[:error] = "colour not deleted" unless @colour.destroy
   	redirect_back(fallback_location: root_url)
   end
 
   private
 
-  def colour_params
-  	params.require(:colour).permit(:name, :hex)
+  def find_colour
+    render 'no_colour' unless @colour = Colour.find_by_id(params[:id])
   end
 
-  def color_exist?
-   	params[:color] =~ /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i
+  def colour_params
+  	params.require(:colour).permit(:name, :hex)
   end
 end
