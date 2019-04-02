@@ -1,1 +1,5 @@
-$("#colors").append("<li><%= @color.hex %></li>");
+<% if flash[:error] %>
+$("#message").html("<%= j flash[:error] %>");
+<% else %>
+$("#message").html("Colour <%= @colour.hex %> created");
+<% end %>

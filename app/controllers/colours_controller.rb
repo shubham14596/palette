@@ -1,10 +1,9 @@
-require "colorable"
-include Colorable
-
 class ColoursController < ApplicationController
-
   def show
     @colour = Colour.find_by_id(params[:id])
+  end
+
+  def new
   end
 
   def update
@@ -18,21 +17,20 @@ class ColoursController < ApplicationController
   end
 
   def create
-  	render nothing: true and return unless color_exist? 
-  	@color = Color.new(params[:color])
-    Palette.colors.push({r: @color.rgb[0], g: @color.rgb[1], b: @color.rgb[2], name: params[:name]})
+  	@colour = Colour.new(colour_params)
+    flash[:error] = "Invalid Colour" unless @colour.save
   end
 
   def destroy
   	colour = Colour.find_by_id(params[:id])
-  	colour.destroy
+  	flash[:error] = "colour not deleted" unless colour.destroy
   	redirect_back(fallback_location: root_url)
   end
 
   private
 
   def colour_params
-  	params.require(:colour).permit(:R, :G, :B, :name)
+  	params.require(:colour).permit(:name, :hex)
   end
 
   def color_exist?

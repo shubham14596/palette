@@ -8,6 +8,7 @@ class PalettesController < ApplicationController
   end
 
   def new
+    @colours = Colour.all
   end
 
   def create
