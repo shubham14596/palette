@@ -1,20 +1,27 @@
 <h3 align="center" class="shadow"><b>Create a new Palette</b></h3>
-<%= form_for :palette, url: palettes_path do |f| %>
-  <div class="row">
-    <%= f.text_field :name , placeholder: 'Palette Name', class: "col-md-4" %>
-    <%= f.submit :create_palette, class: "col-md-4 btn btn-primary" %>
-  </div>
-<% end %>
-<br>
-<div class="row">
-  <div class="col-md-4">
-  	<center>
-      <%= select_tag :select_colour, options_from_collection_for_select(@colours, 'id', 'name',), prompt: "<Select Colour>", class: "btn", style: "background: #ffa; color: blue" %><br>
-      &nbsp;&nbsp;&nbsp; Or <br>
-      <%= link_to 'Create New Colour', new_colour_path %>
-    </center>
-  </div>
-  <div>
-    Colors:<br>
+<div align="center" class="card" style="width: 50%; margin: 0 auto; margin-top: 50px" >
+  <div class="card-body">
+    <%= form_for :palette, url: palettes_path do |f| %>
+      <div class="row">
+        <%= f.text_field :name , placeholder: 'Palette Name', class: "col-md-6" %>
+        <%= f.submit :create_palette, class: "col-md-6 btn btn-primary" %>
+      </div>
+    <% end %>
+    <br>
+    <div class="row">
+      <div class="col-md-5">
+      	<center>
+          <%= select_tag :select_colour, options_from_collection_for_select(@colours, 'id', 'name',), prompt: "<Select Colour>", class: "btn", style: "background: #ffa; color: blue" %><br>
+          &nbsp;&nbsp;&nbsp; Or <br>
+          <%= link_to 'Create New Colour', new_colour_path %>
+        </center>
+      </div>
+      <div>
+        <Button onClick="selectColour()">></Button>
+      </div>
+      <div>
+        Colors:<br>
+      </div>
+    </div>
   </div>
 </div>

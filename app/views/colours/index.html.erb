@@ -1,9 +1,13 @@
+
 <h3> All Colours </h3>
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
 <% @colours.each do |colour| %>
   <div class="row">
-    <span class="col-md-4" style="width:50px; height:50px; background: rgb(<%= colour.R %>, <%= colour.G %>, <%= colour.B %>)"></span>
-
-    <%= link_to 'show', colour_path(id: colour.id), class: "col-md-1", method: :get %>
+    <span class="col-md-4" style="width:50px; height:50px; background: <%= colour.hex %>"></span>
+    &nbsp;&nbsp;
+    <%= link_to 'edit', edit_colour_path(id: colour.id) %> &nbsp;&nbsp;&nbsp;
     <%= link_to 'Delete', colour_path(id: colour.id) , method: :delete %>
   </div>
 <% end %>

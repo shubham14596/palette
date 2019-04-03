@@ -1,35 +1,49 @@
 class ColoursController < ApplicationController
-  before_action :find_colour, only: [:show, :update, :destroy]
-
-  def show
-  end
-
-  def new
-  end
-
-  def update
-    @colour.update(colour_params)
-    redirect_to colours_path
-  end
+  before_action :find_colour, only: [ :update, :destroy, :edit, :show]
 
   def index
     @colours = Colour.all
   end
 
+  def new
+    @colour = Colour.new
+  end
+  
+  def show
+  end
+
+  def edit
+  end
+
   def create
-  	@colour = Colour.new(colour_params)
-    flash[:error] = "Invalid Colour" unless @colour.save
+    @colour = Colour.new(colour_params)
+    if @colour.save
+      flash[:success] = 'Color created successfully'
+      redirect_to colours_path
+    else
+      render 'new'
+    end
+  end
+
+  def update
+    if @colour.update(colour_params)
+      flash[:success] = 'Color Updated successfully'
+      redirect_to @colour 
+    else
+      render 'edit'
+    end
   end
 
   def destroy
-  	flash[:error] = "colour not deleted" unless @colour.destroy
-  	redirect_back(fallback_location: root_url)
+  	flash[:danger] = "colour not deleted" unless @colour.destroy
+  	redirect_to colours_path
   end
 
   private
 
   def find_colour
-    render 'no_colour' unless @colour = Colour.find_by_id(params[:id])
+    @colour = Colour.find_by_id(params[:id])
+    render 'no_colour' unless @colour 
   end
 
   def colour_params

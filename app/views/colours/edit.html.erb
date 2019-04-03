@@ -1,0 +1,15 @@
+<center><h3 style="color: #faa">Colour Creator</h3></center>
+<div class = "body" style = "margin-left: 10px">
+  <p>
+    <%= link_to '< Go back to create palette', new_palette_path %>
+  </p>
+
+  <center>
+    <div class="card shadow-lg" style="width: 30%; border-radius: 15px; padding: 20px ">
+      <div style="border-radius: 50%; height: 100px; width: 100px; background: #000"></div><br>
+        <%= render 'form', save_button: 'Update' %>
+      <div id="message">
+      </div>
+    </div>
+  </center>
+</div>
