@@ -1,5 +1,5 @@
 <h3 align="center" class="shadow"><b>Create a new Palette</b></h3>
-<div align="center" class="card" style="width: 50%; margin: 0 auto; margin-top: 50px" >
+<div class="card container body">
   <div class="card-body">
     <%= form_for :palette, url: palettes_path do |f| %>
       <div class="row">
@@ -10,11 +10,14 @@
     <br>
     <div class="row">
       <div class="col-md-5">
-      	<center>
-          <%= select_tag :select_colour, options_from_collection_for_select(@colours, 'id', 'name',), prompt: "<Select Colour>", class: "btn", style: "background: #ffa; color: blue" %><br>
-          &nbsp;&nbsp;&nbsp; Or <br>
-          <%= link_to 'Create New Colour', new_colour_path %>
-        </center>
+        <label for="sel">Choose Colours:</label>
+        <select multiple class="form-control" id="sel">
+          <% @colours.each do |colour| %>
+            <option value="<%= colour.name %>"><%= colour.name %></option>
+          <% end %>
+        </select>
+        Or <br>
+        <%= link_to 'Create New Colour', new_colour_path %>
       </div>
       <div>
         <Button onClick="selectColour()">></Button>

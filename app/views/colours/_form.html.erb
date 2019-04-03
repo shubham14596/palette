@@ -2,7 +2,7 @@
   <div class="form-group">
     <label for="colour_name">Name:</label>
     <%= f.text_field :name , placeholder: 'Enter colour name', class: 'form-control' %>
-    <div class="error">
+    <div class="error text-danger">
       <%= @colour.errors[:name][0] %>
     </div>
   </div>

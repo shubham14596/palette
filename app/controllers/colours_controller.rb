@@ -36,8 +36,8 @@ class ColoursController < ApplicationController
   end
 
   def destroy
-  	flash[:danger] = "colour not deleted" unless @colour.destroy
-  	redirect_to colours_path
+    flash[:danger] = "colour not deleted" unless @colour.destroy
+    redirect_to colours_path
   end
 
   private
@@ -48,6 +48,6 @@ class ColoursController < ApplicationController
   end
 
   def colour_params
-  	params.require(:colour).permit(:name, :hex)
+    params.require(:colour).permit(:name, :hex)
   end
 end
