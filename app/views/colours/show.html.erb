@@ -1,0 +1,14 @@
+<h3 class="text-secondary">Colour Info:</h3>
+<div class = "body">
+  <p>
+    <%= link_to '< Go to Home', palettes_path %>
+  </p>
+
+  <div >
+    <div id="preview" style="background: <%= @colour.hex %>"></div><br>
+    Name: <%= @colour.name %><br>
+    Code: <%= @colour.hex %>
+  </div>
+  <br>
+  <%= link_to 'Change', edit_colour_path(@colour.id) %>
+</div>

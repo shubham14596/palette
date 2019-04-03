@@ -1,8 +1,18 @@
 <center><h3 style="color: #faa">Colour Creator</h3></center>
-<div class = "body" style = "margin-left: 10px">
-  <p>
-    <%= link_to '< Go back to create palette', new_palette_path %>
-  </p>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <div>
+      <ul class="nav navbar-nav mr-auto" style="flex-direction: row;">
+        <li><a class="nav-item nav-link fa fa-home" href="/palettes">Home</a></li>
+        <li><a class="nav-item nav-link fa fa-list-alt" href="/colours">Colours List</a></li>
+        <li><a class="nav-item nav-link fa fa-plus" href="/palettes/new">New Palette</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class = "body">
 
   <div >
       <%= render 'form', save_button: 'Add' %>

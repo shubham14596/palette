@@ -8,8 +8,9 @@ class ColoursController < ApplicationController
   def new
     @colour = Colour.new
   end
-  
+
   def show
+
   end
 
   def edit
@@ -28,7 +29,7 @@ class ColoursController < ApplicationController
   def update
     if @colour.update(colour_params)
       flash[:success] = 'Color Updated successfully'
-      redirect_to @colour 
+      redirect_to @colour
     else
       render 'edit'
     end

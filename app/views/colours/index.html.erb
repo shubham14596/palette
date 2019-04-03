@@ -1,13 +1,46 @@
-
-<h3> All Colours </h3>
+<h3 align="center" class="text-secondary"> All Colours </h3>
+<br>
 <% flash.each do |key, value| %>
   <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
-<% @colours.each do |colour| %>
-  <div class="row">
-    <span class="col-md-4" style="width:50px; height:50px; background: <%= colour.hex %>"></span>
-    &nbsp;&nbsp;
-    <%= link_to 'edit', edit_colour_path(id: colour.id) %> &nbsp;&nbsp;&nbsp;
-    <%= link_to 'Delete', colour_path(id: colour.id) , method: :delete %>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <div>
+      <ul class="nav navbar-nav mr-auto" style="flex-direction: row;">
+        <li><a class="nav-item nav-link fa fa-home" href="/palettes">Home</a></li>
+        <li><a class="nav-item nav-link fa fa-plus" href="colours/new">New Colour</a></li>
+        <li><a class="nav-item nav-link fa fa-plus" href="/palettes/new">New Palette</a></li>
+      </ul>
+    </div>
   </div>
-<% end %>
+</nav>
+
+<div class="row">
+  <div class="container col-md-8">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Code</th>
+          <th>Preview</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @colours.each do |colour| %>
+          <tr>
+            <td><%= colour.name %></td>
+            <td><%= colour.hex %></td>
+            <td style="background: <%= colour.hex %>"></td>
+            <td align="right"><%= link_to 'Change', edit_colour_path(colour.id) %></td>
+            <td align="right"><%= link_to 'Delete', colour_path(colour.id), method: :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  <div class="row">
+    
+  </div>
