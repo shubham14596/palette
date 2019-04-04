@@ -1,0 +1,20 @@
+<table class="container table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Code</th>
+      <th>Preview</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% colours.each do |colour| %>
+      <tr>
+        <td><%= colour.name %></td>
+        <td><%= colour.hex %></td>
+        <td style="background: <%= colour.hex %>"></td>
+        <td align="right"><%= link_to 'Change', edit_colour_path(colour.id) %></td>
+        <td align="right"><%= link_to 'Delete', delete_link, method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

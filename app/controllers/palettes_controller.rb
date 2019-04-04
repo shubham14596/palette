@@ -1,7 +1,11 @@
 class PalettesController < ApplicationController
-  before_action :find_palette, only: [:show, :destroy, :update]
+  before_action :find_palette, only: [:show, :edit, :destroy, :update]
 
   def show
+  end
+
+  def edit
+    @colours = @palette.colours
   end
 
   def new
@@ -12,8 +16,8 @@ class PalettesController < ApplicationController
   def create
     @palette = Palette.new(palette_params)
     if @palette.save
-      params[:palette][:colour_ids].each do |c|
-        colour = Colour.find_by_id(c)
+      params[:palette][:colour_ids].each do |color|
+        colour = Colour.find_by_id(color)
         @palette.colours << colour if colour
       end
       redirect_to root_url
@@ -23,7 +27,7 @@ class PalettesController < ApplicationController
   end
 
   def index
-    @palettes = Palette.all
+    @palettes = Palette.order('name').page(params[:page]).per(6)
   end
 
   def destroy
@@ -32,9 +36,16 @@ class PalettesController < ApplicationController
   end
 
   def update
-    @palette.name = params[:palette][:name]
-    @palette.save
-    redirect_back(fallback_location: root_url)
+    if @palette.update(palette_params)
+      params[:palette][:colour_ids].each do |color|
+        colour = Colour.find_by_id(color)
+        @palette.colours << colour if colour
+      end
+      flash[:success] = 'Palette Updated successfully'
+      redirect_to @palette
+    else
+      render 'edit'
+    end
   end
 
   private

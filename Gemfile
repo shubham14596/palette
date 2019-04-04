@@ -74,3 +74,7 @@ gem "font-awesome-rails", "~> 4.7"
 gem "jquery-minicolors-rails", "~> 2.2"
 
 gem "select2-rails", "~> 4.0"
+
+gem "kaminari", "~> 1.1"
+
+gem "bootstrap4-kaminari-views", "~> 1.0"

@@ -1,0 +1,16 @@
+<div class="card container body" id="palette">
+  <div class="card-body">
+    <%= form_for @palette do |f| %>
+      <p>
+        <label for="name"><b>Name</b></label><br>
+        <%= f.text_field :name %>
+      </p>
+      <p>
+      <label for="selection"><b>Choose Colours</b></label>
+      <%= f.select :colour_ids, @colours.collect {|a| [a.name, a.id]}, {}, class: 'select2', id: "selection", multiple: true %>
+      </p>
+
+      <%= f.submit save_button, class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
