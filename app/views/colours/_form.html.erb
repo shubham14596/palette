@@ -1,3 +1,5 @@
+<div id="colour_view" style="width: 250px; height: 40px; border-color: black; border-width: 5px"></div>
+
 <%= form_for @colour do |f| %>
   <div class="form-group">
     <label for="colour_name">Name:</label>
@@ -9,7 +11,7 @@
 
   <div class="form-group">
     <label for="colour_hex">Code:</label>
-    <%= f.text_field :hex , placeholder: '#RRGGBB', class: 'form-control' %>
+    <%= f.text_field :hex , placeholder: '#RRGGBB', class: 'form-control', onkeypress: "showColour()" %>
     <span class="error text-danger">
       <%= @colour.errors[:hex][0] %>
     </span>
@@ -17,3 +19,10 @@
 
   <%= f.submit save_button, class: "btn btn-success" %><br>
 <% end %>
+
+<script>
+  function showColour(){
+    var code = $("#colour_hex").val();
+    $("#colour_view").css("background",code);
+  }
+</script>

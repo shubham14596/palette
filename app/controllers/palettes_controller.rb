@@ -1,26 +1,24 @@
-require "colorable"
-include Colorable
-
 class PalettesController < ApplicationController
-  
+  before_action :find_palette, only: [:show, :destroy, :update]
+
   def show
-    @palette = Palette.find_by_id(params[:id])
   end
 
   def new
     @colours = Colour.all
+    @palette = Palette.new
   end
 
   def create
-    palette = Palette.new(palette_params)
-    if palette.save
-      Palette.colors.each do |color|
-        c = Colour.create(R: color[:r], G: color[:g], B: color[:b], name: color[:name])
-        palette.colours << c
+    @palette = Palette.new(palette_params)
+    if @palette.save
+      params[:palette][:colour_ids].each do |c|
+        colour = Colour.find_by_id(c)
+        @palette.colours << colour if colour
       end
       redirect_to root_url
     else
-      redirect_back(fallback_location: root_url)
+      render 'new'
     end
   end
 
@@ -29,29 +27,24 @@ class PalettesController < ApplicationController
   end
 
   def destroy
-    palette = Palette.find(params[:id])
-    palette.destroy
+    @palette.destroy
     redirect_back(fallback_location: root_url)
   end
 
   def update
-    palette = Palette.find(params[:id])
-    palette.name = params[:palette][:name]
-    palette.save
-    redirect_back(fallback_location: root_url)
-  end
-
-  def add_colour
-    c = Color.new(params[:color])
-    colour = Colour.create(R: c.rgb[0], G: c.rgb[1], B: c.rgb[2], name: params[:name])
-    palette = Palette.find(params[:id])
-    palette.colours << colour
+    @palette.name = params[:palette][:name]
+    @palette.save
     redirect_back(fallback_location: root_url)
   end
 
   private
 
+  def find_palette
+    @palette = Palette.find_by_id(params[:id])
+    render 'no_palette' unless @palette 
+  end
+
   def palette_params
-    params.require(:palette).permit(:name)
+    params.require(:palette).permit(:name, :color_ids)
   end
 end

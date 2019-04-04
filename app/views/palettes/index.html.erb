@@ -1,17 +1,17 @@
-<div class="nav navbar">
+<div class="nav navbar bg-light">
   <div class="nav navbar-brand"><b>Palettes</b></div>
   <div class="nav">
-    <%= link_to 'Colours', colours_path, class: "navbar nav-item btn btn-danger" %>
-    <%= link_to 'New Palette', new_palette_path, class: "navbar nav-item btn btn-primary" %>
+    <%= link_to 'Colours', colours_path, class: "nav-link nav-item btn btn-danger", style: "margin-right: 10px" %>
+    <%= link_to 'New Palette', new_palette_path, class: "nav-link nav-item btn btn-info" %>
   </div>
 </div>
-<div class = "row" style="margin-left: 10px">
+<div class = "row body">
   <% @palettes.each do |p| %>
     <span class="col-md-4">
-      <div class = "card shadow" style="border-radius: 10px">
-        <div class = "card-body row", style="overflow: auto; height: 200px">
-          <% p.colours.each do |color| %>
-            <span class="col-md-3" style="border-radius: 50%; background: rgb(<%= color.R %>, <%= color.G %>, <%= color.B %>); width:50px; height:50px; margin: 0.8rem">
+      <div class = "card shadow palette">
+        <div class = "card-body row palette-body">
+          <% p.colours.each do |colour| %>
+            <span class="col-md-3" style="background: <%= colour.hex %>">
             </span>
           <% end %>
         </div>
@@ -23,3 +23,4 @@
     </span>
   <% end %>
 </div>
+

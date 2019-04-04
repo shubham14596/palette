@@ -18,3 +18,4 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require jquery.minicolors
+//= require select2-full
