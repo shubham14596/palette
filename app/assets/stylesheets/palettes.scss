@@ -2,12 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.select2{
-  width: 20rem;
-  height: 40px;
-}
-
-.card{
+.card#palette{
   width: 25rem;  
 }
 
@@ -15,20 +10,10 @@
   width: 20rem;
 }
 
-.palette{
-  border-radius: 10px;
-}
 
-.palette-body{
-  overflow: auto;
-  height: 200px;
-}
-
-.palette-body .col-md-3{
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  margin: 0.8rem;
+.select2{
+  width: 20rem;
+  height: 40px;
 }
 
 #swatches{
@@ -36,6 +21,8 @@
 }
 
 #swatch{
-  width: 15px;
-  height: 15px;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  float: left;
 }

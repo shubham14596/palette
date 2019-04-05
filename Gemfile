@@ -61,17 +61,11 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem "colorable", "~> 0.2.1"
-
 gem "bootstrap", "~> 4.3"
 
 gem "jquery-rails", "~> 4.3"
 
-gem "autoprefixer-rails", "~> 9.5"
-
 gem "font-awesome-rails", "~> 4.7"
-
-gem "jquery-minicolors-rails", "~> 2.2"
 
 gem "select2-rails", "~> 4.0"
 
