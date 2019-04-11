@@ -17,6 +17,7 @@
   <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
 
+<div class="pull-right"><%= page_entries_info @colours %></div>
 <table class="container table">
   <thead>
     <tr>
@@ -37,3 +38,6 @@
     <% end %>
   </tbody>
 </table>
+<div id="pagination">
+  <%= paginate @colours, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm",              nav_class: "d-inline-b" %>
+</div>    

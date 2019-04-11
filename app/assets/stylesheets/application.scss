@@ -18,7 +18,11 @@
  */
 
 
- @import "colours";
- @import "palettes";
- @import 'select2';
- @import 'select2-bootstrap';
+@import "colours";
+@import "palettes";
+@import 'select2';
+@import 'select2-bootstrap';
+
+#invalid_record{
+  margin-top: 100px;
+}

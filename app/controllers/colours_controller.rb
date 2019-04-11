@@ -1,20 +1,17 @@
 class ColoursController < ApplicationController
-  before_action :find_colour, only: [ :update, :destroy, :edit, :show]
+  before_action :find_colour, only: %i[update destroy edit show]
 
   def index
-    @colours = Colour.all
+    @colours = Colour.order('name').page(params[:page]).per(8)
   end
 
   def new
     @colour = Colour.new
   end
 
-  def show
+  def show; end
 
-  end
-
-  def edit
-  end
+  def edit; end
 
   def create
     @colour = Colour.new(colour_params)
@@ -36,7 +33,7 @@ class ColoursController < ApplicationController
   end
 
   def destroy
-    flash[:danger] = "colour not deleted" unless @colour.destroy
+    flash[:danger] = 'colour not deleted' unless @colour.destroy
     redirect_to colours_path
   end
 
@@ -44,7 +41,10 @@ class ColoursController < ApplicationController
 
   def find_colour
     @colour = Colour.find_by_id(params[:id])
-    render 'no_colour' unless @colour 
+    return if @colour.present?
+
+    flash[:danger] = 'No colour found'
+    redirect_to colours_path
   end
 
   def colour_params

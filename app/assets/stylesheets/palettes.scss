@@ -16,13 +16,13 @@
   height: 40px;
 }
 
-#swatches{
-  overflow: auto;
-}
-
 #swatch{
   width: 30px;
   height: 30px;
   position: relative;
   float: left;
+}
+
+#pagination {
+  margin-left: 75px;
 }

@@ -1,46 +1,46 @@
 class PalettesController < ApplicationController
-  before_action :find_palette, only: [:show, :edit, :destroy, :update]
+  before_action :find_palette, only: %i[show edit destroy update]
+  before_action :find_color, only: %i[new edit create update]
+  before_action :find_palette_color, only: %i[create update]
 
-  def show
+  def index
+    @palettes = Palette.order('id DESC').page(params[:page]).per(6)
   end
 
-  def edit
-    @colours = @palette.colours
-  end
+  def show; end
 
   def new
-    @colours = Colour.all
     @palette = Palette.new
   end
 
   def create
     @palette = Palette.new(palette_params)
+    
     if @palette.save
-      params[:palette][:colour_ids].each do |color|
-        colour = Colour.find_by_id(color)
-        @palette.colours << colour if colour
+      @palette_colors.each do |color|
+        @palette.colours << color
       end
+      flash[:success] = 'Palette created successfully'
       redirect_to root_url
     else
       render 'new'
     end
   end
 
-  def index
-    @palettes = Palette.order('name').page(params[:page]).per(6)
-  end
-
-  def destroy
-    @palette.destroy
-    redirect_back(fallback_location: root_url)
-  end
+  def edit; end
 
   def update
     if @palette.update(palette_params)
-      params[:palette][:colour_ids].each do |color|
-        colour = Colour.find_by_id(color)
-        @palette.colours << colour if colour
+      
+      # remove colours
+      colors_to_remove = @palette.colours - @palette_colors
+      colors_to_remove.each { |color| @palette.colours.delete color }
+
+      # add new colours
+      @palette_colors.each do |colour|
+        @palette.colours << colour if !@palette.colours.include? colour
       end
+
       flash[:success] = 'Palette Updated successfully'
       redirect_to @palette
     else
@@ -48,11 +48,31 @@ class PalettesController < ApplicationController
     end
   end
 
+  def destroy
+    flash[:success] = 'Palette deleted successfully' if @palette.destroy
+    redirect_back(fallback_location: root_url)
+  end
+
   private
 
   def find_palette
     @palette = Palette.find_by_id(params[:id])
-    render 'no_palette' unless @palette 
+    return if @palette.present?
+
+    flash[:danger] = 'No palette found'
+    redirect_to palettes_path
+  end
+
+  def find_palette_color
+    @palette_colors = Colour.where(id: params[:colour_ids])
+    unless @palette_colors.present?
+      flash[:error] = 'Please select valid colors'
+      render params[action] == 'create' ? 'new' : 'edit' && return
+    end
+  end
+
+  def find_color
+    @colours = Colour.all
   end
 
   def palette_params

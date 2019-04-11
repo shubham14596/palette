@@ -4,10 +4,13 @@
       <p>
         <label for="name"><b>Name</b></label><br>
         <%= f.text_field :name %>
+        <div class="error text-danger">
+          <%= @palette.errors[:name][0] %>
+        </div>
       </p>
       <p>
-      <label for="selection"><b>Choose Colours</b></label>
-      <%= f.select :colour_ids, @colours.collect {|a| [a.name, a.id]}, {}, class: 'select2', id: "selection", multiple: true %>
+        <label for="selection"><b>Choose Colours</b></label>
+        <%= select_tag 'colour_ids', options_for_select(@colours.collect {|a| [a.name, a.id]}, @palette.colours.pluck(:id)), {multiple: true, class: 'select2', id: "selection", required: true} %>
       </p>
 
       <%= f.submit save_button, class: "btn btn-success" %>
